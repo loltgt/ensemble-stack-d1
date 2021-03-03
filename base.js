@@ -1,3 +1,11 @@
+/*!
+ * loltgt ensemble.base
+ *
+ * @version 0.0.1
+ * @copyright Copyright (C) Leonardo Laureti
+ * @license MIT License
+ */
+
 'use strict';
 
 (function(ensemble) {
