@@ -59,47 +59,44 @@
       return delay || parseInt(dtime);
     }
 
-    // return undef
+    // return bool
     appendNode(root, node) {
       node = Compo.isCompo(node) ? node.node : node;
-      return Compo.isCompo(root) ? root.append(node) : root.appendChild(node);
+      return Compo.isCompo(root) ? root.append(node) : !! root.appendChild(node);
     }
 
-    // return undef
+    // return bool
     prependNode(root, node) {
       node = Compo.isCompo(node) ? node.node : node;
-      return Compo.isCompo(root) ? root.append(node) : root.prependChild(node);
+      return Compo.isCompo(root) ? root.append(node) : !! root.prependChild(node);
     }
 
-    // return undef
+    // return bool
     removeNode(root, node) {
       node = Compo.isCompo(node) ? node.node : node;
-      return Compo.isCompo(root) ? root.remove(node) : root.removeChild(node);
+      return Compo.isCompo(root) ? root.remove(node) : !! root.removeChild(node);
     }
 
-    // return undef
     cloneNode(node, deep = false) {
       return Compo.isCompo(node) ? node.clone(deep) : node.cloneNode(deep);
     }
 
-    // return undef
     hasAttr(node, attr) {
       return Compo.isCompo(node) ? node.hasAttr(attr) : node.hasAttribute(attr);
     }
 
-    // return undef
     getAttr(node, attr) {
       return Compo.isCompo(node) ? node.getAttr(attr) : node.getAttribute(attr);
     }
 
     // return undef
     setAttr(node, attr, value) {
-      return Compo.isCompo(node) ? node.setAttr(attr, value) : node.setAttribute(attr, value);
+      Compo.isCompo(node) ? node.setAttr(attr, value) : node.setAttribute(attr, value);
     }
 
     // return undef
     delAttr(node, attr) {
-      return Compo.isCompo(node) ? node.delAttr(attr) : node.removeAttribute(attr);
+      Compo.isCompo(node) ? node.delAttr(attr) : node.removeAttribute(attr);
     }
 
   }
