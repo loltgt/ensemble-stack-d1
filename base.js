@@ -10,6 +10,12 @@
 
 (function(window, module, require, ensemble) {
 
+  ensemble = ensemble || require('../ensemble');
+
+  const Compo = ensemble.Compo;
+  const Event = ensemble.Event;
+
+
   class base {
 
     defaults(defaults, options) {
@@ -27,23 +33,21 @@
     }
 
     compo(tag, name, props) {
-      // no ref to global
-      return new globalThis.ensemble.Compo(this.options.ns, tag, name, props);
+      return new Compo(this.options.ns, tag, name, props);
     }
 
     selector(query, node, all = false) {
-      node = node && '__compo' in node ? node.node : (node || document);
+      node = Compo.isCompo(node) ? node.node : (node || document);
       return all ? node.querySelectorAll(query) : node.querySelector(query);
     }
 
     event(name, node) {
-      node = node && '__compo' in node ? node.node : (node || document);
-      // no ref to global
-      return new globalThis.ensemble.Event(name, node);
+      node = Compo.isCompo(node) ? node.node : (node || document);
+      return new Event(name, node);
     }
 
     timing(node, dtime = 3e2, prop = 'transitionDuration') {
-      node = node && '__compo' in node ? node.node : node;
+      node = Compo.isCompo(node) ? node.node : node;
       let delay = window.getComputedStyle(node)[prop];
 
       if (delay != '') {
@@ -57,48 +61,45 @@
 
     // return undef
     appendNode(root, node) {
-      root = root && '__compo' in root ? root.node : root;
-      node = node && '__compo' in node ? node.node : node;
-      return root.appendChild(node);
+      node = Compo.isCompo(node) ? node.node : node;
+      return Compo.isCompo(root) ? root.append(node) : root.appendChild(node);
     }
 
     // return undef
     prependNode(root, node) {
-      root = root && '__compo' in root ? root.node : root;
-      node = node && '__compo' in node ? node.node : node;
-      return root.prependChild(node);
+      node = Compo.isCompo(node) ? node.node : node;
+      return Compo.isCompo(root) ? root.append(node) : root.prependChild(node);
     }
 
     // return undef
     removeNode(root, node) {
-      root = root && '__compo' in root ? root.node : root;
-      node = node && '__compo' in node ? node.node : node;
-      return root.removeChild(node);
+      node = Compo.isCompo(node) ? node.node : node;
+      return Compo.isCompo(root) ? root.remove(node) : root.removeChild(node);
     }
 
     // return undef
     cloneNode(node, deep = false) {
-      return node && '__compo' in node ? node.clone(deep) : node.cloneNode(deep);
+      return Compo.isCompo(node) ? node.clone(deep) : node.cloneNode(deep);
     }
 
     // return undef
     hasAttr(node, attr) {
-      return node && '__compo' in node ? node.hasAttr(attr) : node.hasAttribute(attr);
+      return Compo.isCompo(node) ? node.hasAttr(attr) : node.hasAttribute(attr);
     }
 
     // return undef
     getAttr(node, attr) {
-      return node && '__compo' in node ? node.getAttr(attr) : node.getAttribute(attr);
+      return Compo.isCompo(node) ? node.getAttr(attr) : node.getAttribute(attr);
     }
 
     // return undef
     setAttr(node, attr, value) {
-      return node && '__compo' in node ? node.setAttr(attr, value) : node.setAttribute(attr, value);
+      return Compo.isCompo(node) ? node.setAttr(attr, value) : node.setAttribute(attr, value);
     }
 
     // return undef
     delAttr(node, attr) {
-      return node && '__compo' in node ? node.delAttr(attr) : node.removeAttribute(attr);
+      return Compo.isCompo(node) ? node.delAttr(attr) : node.removeAttribute(attr);
     }
 
   }
