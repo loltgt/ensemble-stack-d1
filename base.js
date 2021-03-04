@@ -46,19 +46,6 @@
       return new Event(name, node);
     }
 
-    timing(node, dtime = 3e2, prop = 'transitionDuration') {
-      node = Compo.isCompo(node) ? node.node : node;
-      let delay = window.getComputedStyle(node)[prop];
-
-      if (delay != '') {
-        delay = delay.indexOf('s') ? (parseFloat(delay) * 1e3) : parseInt(delay);
-      } else {
-        return parseInt(dtime);
-      }
-
-      return delay || parseInt(dtime);
-    }
-
     // return bool
     allocMethod(mfix, root, node) {
       const _root_isCompo = Compo.isCompo(root);
@@ -110,6 +97,25 @@
     // return undef
     delAttr(node, attr) {
       Compo.isCompo(node) ? node.delAttr(attr) : node.removeAttribute(attr);
+    }
+
+    binds(method) {
+      const self = this;
+
+      return function(e) { method.call(self, e, this); }
+    }
+
+    timing(node, dtime = 3e2, prop = 'transitionDuration') {
+      node = Compo.isCompo(node) ? node.node : node;
+      let delay = window.getComputedStyle(node)[prop];
+
+      if (delay != '') {
+        delay = delay.indexOf('s') ? (parseFloat(delay) * 1e3) : parseInt(delay);
+      } else {
+        return parseInt(dtime);
+      }
+
+      return delay || parseInt(dtime);
     }
 
   }
