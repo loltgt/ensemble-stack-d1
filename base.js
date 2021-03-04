@@ -8,7 +8,7 @@
 
 'use strict';
 
-(function(ensemble) {
+(function(window, module, require, ensemble) {
 
   class base {
 
@@ -104,6 +104,7 @@
   }
 
 
-  globalThis.ensemble = { ...ensemble, ...{ base } };
+  window.ensemble = { ...ensemble, ...{ base } };
+  module.exports = base;
 
-}(globalThis.ensemble));
+}((typeof window != 'undefined' ? window : {}), (typeof module != 'undefined' ? module : {}), (typeof require != 'undefined' ? require : function() {}), globalThis.ensemble));
