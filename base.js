@@ -60,21 +60,34 @@
     }
 
     // return bool
+    allocMethod(mfix, root, node) {
+      const _root_isCompo = Compo.isCompo(root);
+      const _node_isCompo = Compo.isCompo(node);
+
+      if (_root_isCompo && _node_isCompo) {
+        return root[mfix](node.node);
+      } else if (_root_isCompo) {
+        return !! root.node[mfix + 'Child'](node);
+      } else if (_node_isCompo) {
+        return root[mfix + 'Child'](node.node);
+      }
+
+      return root[mfix + 'Child'](node);
+    }
+
+    // return bool
     appendNode(root, node) {
-      node = Compo.isCompo(node) ? node.node : node;
-      return Compo.isCompo(root) ? root.append(node) : !! root.appendChild(node);
+      return this.allocMethod('append', root, node);
     }
 
     // return bool
     prependNode(root, node) {
-      node = Compo.isCompo(node) ? node.node : node;
-      return Compo.isCompo(root) ? root.append(node) : !! root.prependChild(node);
+      return this.allocMethod('prepend', root, node);
     }
 
     // return bool
     removeNode(root, node) {
-      node = Compo.isCompo(node) ? node.node : node;
-      return Compo.isCompo(root) ? root.remove(node) : !! root.removeChild(node);
+      return this.allocMethod('remove', root, node);
     }
 
     cloneNode(node, deep = false) {
