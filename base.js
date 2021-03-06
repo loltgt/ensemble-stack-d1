@@ -37,25 +37,32 @@
     }
 
     selector(query, node, all = false) {
-      node = Compo.isCompo(node) ? node.node : (node || document);
+      node = node || document;
+
       return all ? node.querySelectorAll(query) : node.querySelector(query);
     }
 
-    event(name, node) {
-      node = Compo.isCompo(node) ? node.node : (node || document);
-      return new Event(name, node);
+    event(event, node, concurrency = true) {
+      if (typeof event === 'string') {
+        return new Event(event, node);
+      } else if (event) {
+        event.preventDefault();
+        event.target.blur();
+      }
     }
 
     // return bool
     allocMethod(mfix, root, node) {
-      const _root_isCompo = Compo.isCompo(root);
-      const _node_isCompo = Compo.isCompo(node);
+      const root_isCompo = Compo.isCompo(root);
+      const node_isCompo = Compo.isCompo(node);
 
-      if (_root_isCompo && _node_isCompo) {
+      //TODO
+      // direct access to node
+      if (root_isCompo && node_isCompo) {
         return root[mfix](node.node);
-      } else if (_root_isCompo) {
+      } else if (root_isCompo) {
         return !! root.node[mfix + 'Child'](node);
-      } else if (_node_isCompo) {
+      } else if (node_isCompo) {
         return root[mfix + 'Child'](node.node);
       }
 
@@ -105,17 +112,20 @@
       return function(e) { method.call(self, e, this); }
     }
 
-    timing(node, dtime = 3e2, prop = 'transitionDuration') {
-      node = Compo.isCompo(node) ? node.node : node;
-      let delay = window.getComputedStyle(node)[prop];
+    delay(func, node, dtime) {
+      const delay = node ? this.timing(node) : 0;
 
-      if (delay != '') {
-        delay = delay.indexOf('s') ? (parseFloat(delay) * 1e3) : parseInt(delay);
-      } else {
-        return parseInt(dtime);
+      setTimeout(func, delay || dtime);
+    }
+
+    timing(node, prop = 'transitionDuration') {
+      let time = Compo.isCompo(node) ? node.getStyle(prop) : window.getComputedStyle(node)[prop];
+
+      if (time) {
+        time = time.indexOf('s') ? (parseFloat(time) * 1e3) : parseInt(time);
       }
 
-      return delay || parseInt(dtime);
+      return time || 0;
     }
 
   }
