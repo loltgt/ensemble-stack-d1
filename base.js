@@ -13,6 +13,7 @@
   ensemble = ensemble || require('../ensemble');
 
   const Compo = ensemble.Compo;
+  const Data = ensemble.Data;
   const Event = ensemble.Event;
 
 
@@ -36,10 +37,8 @@
       return new Compo(this.options.ns, tag, name, props);
     }
 
-    selector(query, node, all = false) {
-      node = node || document;
-
-      return all ? node.querySelectorAll(query) : node.querySelector(query);
+    data(obj) {
+      return new Data(this.options.ns, obj);
     }
 
     event(event, node, concurrency = true) {
@@ -51,19 +50,26 @@
       }
     }
 
+    selector(query, node, all = false) {
+      node = node || document;
+
+      return all ? node.querySelectorAll(query) : node.querySelector(query);
+    }
+
+    //TODO
+    // direct access to node
     // return bool
     allocMethod(mfix, root, node) {
+      const _ns = '_' + this.options.ns;
       const root_isCompo = Compo.isCompo(root);
       const node_isCompo = Compo.isCompo(node);
 
-      //TODO
-      // direct access to node
       if (root_isCompo && node_isCompo) {
-        return root[mfix](node.node);
+        return root[mfix](node[_ns]);
       } else if (root_isCompo) {
-        return !! root.node[mfix + 'Child'](node);
+        return !! root[_ns][mfix + 'Child'](node);
       } else if (node_isCompo) {
-        return root[mfix + 'Child'](node.node);
+        return root[mfix + 'Child'](node[_ns]);
       }
 
       return root[mfix + 'Child'](node);
