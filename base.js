@@ -43,7 +43,7 @@
 
     event(event, node, concurrency = true) {
       if (typeof event === 'string') {
-        return new Event(event, node);
+        return new Event(this.options.ns, event, node);
       } else if (event) {
         event.preventDefault();
         event.target.blur();
