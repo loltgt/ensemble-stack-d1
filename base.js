@@ -19,6 +19,12 @@
 
   class base {
 
+    constructor() {
+      if (! new.target) {
+        throw 'ensemble error: Wrong invocation, must be called with new.';
+      }
+    }
+
     defaults(defaults, options) {
       const j = {};
 
