@@ -8,13 +8,19 @@
 
 'use strict';
 
-(function(window, module, require, ensemble) {
+// (function(window, module, require, ensemble) {
 
-  ensemble = ensemble || require('../ensemble');
+  // ensemble = ensemble || require('../ensemble');
 
-  const Compo = ensemble.Compo;
-  const Data = ensemble.Data;
-  const Event = ensemble.Event;
+  // const Compo = ensemble.Compo;
+  // const Data = ensemble.Data;
+  // const Event = ensemble.Event;
+
+  // import { Compo, Data, Event } from '../ensemble/index.js';
+
+  import Compo from '../ensemble/Compo.js';
+  import Data from '../ensemble/Data.js';
+  import Event from '../ensemble/Event.js';
 
 
   class base {
@@ -124,7 +130,10 @@
   }
 
 
-  window.ensemble = { ...ensemble, ...{ base } };
-  module.exports = base;
+  // window.ensemble = { ...ensemble, ...{ base } };
+  // module.exports = base;
 
-}((typeof window != 'undefined' ? window : {}), (typeof module != 'undefined' ? module : {}), (typeof require != 'undefined' ? require : function() {}), globalThis.ensemble));
+// }((typeof window != 'undefined' ? window : {}), (typeof module != 'undefined' ? module : {}), (typeof require != 'undefined' ? require : function() {}), globalThis.ensemble));
+
+
+export default base;
