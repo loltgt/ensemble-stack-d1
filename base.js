@@ -111,7 +111,7 @@
       return function(e) { method.call(self, e, this); }
     }
 
-    delay(func, node, dtime) {
+    delay(func, node, dtime) {
       const delay = node ? this.timing(node) : 0;
 
       setTimeout(func, delay || dtime);
