@@ -31,6 +31,7 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  display: block;
   padding: 0;
 }
 h1 {
@@ -65,6 +66,7 @@ h3 {
 }
 
 main {
+  display: block;
   max-width: 800px;
   margin: auto;
   padding: 5vh 1rem 0;
@@ -72,5 +74,6 @@ main {
 
 section,
 article {
+  display: block;
   margin: 5rem 0;
 }
