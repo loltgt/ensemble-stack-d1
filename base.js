@@ -46,11 +46,11 @@
     }
 
     compo(tag, name, props) {
-      return new Compo(this.options.ns, tag, name, props);
+      return tag ? new Compo(this.options.ns, tag, name, props) : Compo;
     }
 
     data(obj) {
-      return new Data(this.options.ns, obj);
+      return obj ? new Data(this.options.ns, obj) : Data;
     }
 
     event(event, node, concurrency = true) {
@@ -59,6 +59,8 @@
       } else if (event) {
         event.preventDefault();
         event.target.blur();
+      } else {
+        return Event;
       }
     }
 
