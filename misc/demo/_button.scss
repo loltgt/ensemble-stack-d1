@@ -14,21 +14,22 @@ section button {
   font-size: .9rem;
   font-weight: bold;
   line-height: 1;
-  color: #eee;
-  background: #333;
+  color: #f5f5f5;
+  background: #24304c;
   border: 0;
-  border-radius: .2rem;
+  border-radius: .3rem;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   -webkit-highlight: none;
 
-  &:hover, &:focus {
-    color: #fff;
-    background: #222;
-  }
   &:active, &:focus {
+    color: #fff;
+    background: #1c356c;
     outline: 0;
     -webkit-tap-highlight-color: transparent;
+  }
+  &:hover {
+    opacity: .95;
   }
 }
