@@ -10,7 +10,7 @@
 
 /**
  * @namespace ensemble
- * @module base
+ * @exports base
  */
 
 import Compo from '../ensemble/Compo.js';
@@ -66,7 +66,7 @@ class base {
    * When passed the first argument it makes a new Compo instance, 
    * otherwise it returns a reference to the Compo class.
    *
-   * @global {function} ensemble.Compo
+   * //global ensemble.Compo
    * @param {string} ns - Composition namespace
    * @param {string} tag - The [DOM] Element node tag -or- component name
    * @param {string} name
@@ -82,7 +82,7 @@ class base {
    * When passed the first argument it makes a new Data instance, 
    * otherwise it returns a reference to the Data class.
    *
-   * @global {function} ensemble.Data
+   * //global ensemble.Data
    * @param {object} obj - A starter Object
    * @returns {mixed}
    */
@@ -97,7 +97,7 @@ class base {
    * if you pass an Event as the first argument, a preventDefault and blur will be performed, 
    * otherwise it returns a reference to the Event class.
    *
-   * @global {function} ensemble.Event
+   * //global ensemble.Event
    * @param {object} obj - A starter Object
    * @returns {mixed}
    */
@@ -118,7 +118,7 @@ class base {
    * @see Element.querySelectorAll()
    * @see Element.querySelector()
    *
-   * @global {object} document
+   * //global document
    * @param {string} query - A text query
    * @param {Element} node - An Element node where find
    * @param {boolean} all - Find single or multiple elements
@@ -251,7 +251,7 @@ class base {
    *
    * @see setTimeout()
    *
-   * @global {function} window.setTimeout
+   * //global window.setTimeout
    * @param {function} func - A function callback
    * @param {mixed} node - An Element node -or- an ensemble.Compo composition
    * @param {int} dtime - A default value of time in milliseconds
@@ -265,8 +265,8 @@ class base {
   /**
    * Calculates a time, based on a time property of the style of an element
    *
-   * @global {function} ensemble.Compo
-   * @global {function} window.getComputedStyle
+   * //global ensemble.Compo
+   * //global window.getComputedStyle
    * @param {mixed} node - An Element node -or- an ensemble.Compo composition
    * @param {string} prop - A style property
    * @returns {int} time - Number of time in milliseconds
