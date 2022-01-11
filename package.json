@@ -1,6 +1,6 @@
 {
   "name": "ensemble-stack-d1",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Repo with foundation class and misc. used by ensemble.Modal, ensemble.Lightbox and ensemble.SocialShare",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,15 @@
     "@babel/plugin-transform-modules-umd": "^7.13.0",
     "@babel/plugin-transform-object-assign": "^7.12.13",
     "@babel/preset-env": "^7.13.10",
+    "@rbnlffl/gulp-rollup": "^0.1.1",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-tap": "^2.0.0",
+    "gulp-terser": "^2.0.1",
+    "sass": "^1.45.2",
     "regenerator-runtime": "^0.13.7"
   }
 }

@@ -7,7 +7,7 @@ const { series, parallel, watch, src, dest } = require('gulp');
 const tap = require('gulp-tap');
 const rename = require('gulp-rename');
 const babel = require('gulp-babel');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const terser = require('gulp-terser');
 const sourcemaps = require('gulp-sourcemaps');
 
@@ -111,7 +111,7 @@ function js_uglify() {
 function css() {
   return src([BASEPATH + 'src/scss/**/*.scss', '!**/*_compat.scss', '!node_modules/**/*.scss'])
     // .pipe(sourcemaps.init())
-    .pipe(sass({ outputStyle: 'nested' }).on('error', sass.logError))
+    .pipe(sass().on('error', sass.logError))
     .pipe(rename(function(sourcePath) {
       sourcePath.dirname = _dst(sourcePath.dirname, 'src', 'dist');
       sourcePath.dirname = sourcePath.dirname.replace('scss', 'css');
@@ -146,7 +146,7 @@ function css_uglify() {
 function css_compat() {
   return src([BASEPATH + 'src/scss/**/*_compat.scss', '!node_modules/**/*.scss'])
     // .pipe(sourcemaps.init())
-    .pipe(sass({ outputStyle: 'nested' }).on('error', sass.logError))
+    .pipe(sass().on('error', sass.logError))
     .pipe(rename(function(sourcePath) {
       sourcePath.dirname = _dst(sourcePath.dirname, 'src', 'dist');
       sourcePath.dirname = sourcePath.dirname.replace('scss', 'css');
