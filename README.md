@@ -1,9 +1,8 @@
-# ensemble stack d1
+# ensemble-stack-d1
 
-Repo with foundation class and misc. used by ensemble.Modal, ensemble.Lightbox and ensemble.SocialShare JavaScript classes from loltgt.
+**Deprecated repository**
 
- 
-**beta stage**
+See ensemble repository at: https://github.com/loltgt/ensemble
 
  
 
